@@ -71,9 +71,6 @@ Dialog {
     }
 
     function resetSettings() {
-        usernameField.text = ''
-        passwordField.text = ''
-        updateTimeout.text = 4
         statusApp.resetSettings()
     }
 

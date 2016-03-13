@@ -18,8 +18,10 @@ Currently it allows you to:
 - Call usage
 - SMS usage
 - Data usage
-2. Change voicemail settings
-3. Change callforwarding settings
+- Max (plafond) tariff
+2. See account information
+3. See contract information
+4. Edit mobile plan options
 
 The mobile plan data is updated once every %L1 hours.
 
@@ -32,11 +34,25 @@ Simpel.nl call status app is created by TheYOSH https://theyosh.nl
 <context>
     <name>Account</name>
     <message>
-        <source>Account</source>
+        <source>Account information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Contract</name>
+    <message>
+        <source>Contract information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Contract_bak</name>
+    <message>
+        <source>Contract info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Here you can read the current account information</source>
+        <source>Here you can read the current contract information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -64,18 +80,6 @@ Simpel.nl call status app is created by TheYOSH https://theyosh.nl
 </context>
 <context>
     <name>Home</name>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contract</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Force Update</source>
         <translation type="unfinished"></translation>
@@ -132,70 +136,27 @@ Simpel.nl call status app is created by TheYOSH https://theyosh.nl
         <source>Last update</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Invoices</name>
     <message>
-        <source>Invoices</source>
+        <source>Account information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not implemented yet!!</source>
+        <source>Contract information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mobile Options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Options</name>
     <message>
-        <source>Mobile options</source>
+        <source>Mobile Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voicemail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voicemail active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voicemail pincode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voicemail email address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Call forwarding</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Extra costs will be added when call forwarding is enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Call forwarding active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Direct forwarding number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Busy forwarding number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Not possible when voicemail enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mobile options are saved</source>
+        <source>Edit mobile options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -241,34 +202,6 @@ Simpel.nl call status app is created by TheYOSH https://theyosh.nl
 <context>
     <name>SimpelStatus</name>
     <message>
-        <source>The loaded credentials are invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No credentials available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update account data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updated voicemail settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updated call forwarding settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The new credentials are saved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The new credentials are not valid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Timeout set to %L1 hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -278,6 +211,22 @@ Simpel.nl call status app is created by TheYOSH https://theyosh.nl
     </message>
     <message>
         <source>Date      ///    Call left, SMS left, Data left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The loaded credentials are invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login successfull. Loading data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account data is up to date</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

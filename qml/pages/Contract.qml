@@ -36,20 +36,17 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: optionsPage
-    SilicaListView {
+    id: contractPage
 
-        PullDownMenu {
-            MenuItem {
-                text: qsTr('Edit mobile options')
-                onClicked: pageStack.push(Qt.resolvedUrl('EditOptions.qml'))
-            }
+    SilicaListView {
+        header: PageHeader {
+            id: header
+            title: qsTr('Contract information')
         }
-        header: PageHeader { title: qsTr('Mobile Options') }
         anchors {
             fill: parent
         }
-        model: statusApp.mobileData.mobileoptions
+        model: statusApp.mobileData.contractoptions
         delegate: FieldListElement {}
     }
 }

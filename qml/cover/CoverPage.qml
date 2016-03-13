@@ -46,7 +46,7 @@ CoverBackground {
         id: coverAction
         iconBackground: false
         CoverAction {
-            //iconSource: Qt.resolvedUrl('../images/mijn_simpel.png')
+            iconSource: Qt.resolvedUrl('../images/SimpelStatus.png')
             onTriggered: force_update_account_data()
         }
     }

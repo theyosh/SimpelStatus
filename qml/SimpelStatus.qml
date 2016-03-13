@@ -44,10 +44,10 @@ ApplicationWindow
 
         property int data_update_timeout: 4
 
-        property string mobilenumber
-        property string mobileplafond
+        property string mobilenumber: qsTr('Loading...')
+        property string mobileplafond: qsTr('Loading...')
 
-        property variant last_update: new Date()
+        property variant last_update: 0
 
         property variant call_usage: QtObject {
             property int total: 0
@@ -85,11 +85,15 @@ ApplicationWindow
         property string callforward_direct
         property string callforward_busy
 
-        property string history: 'Loading...'
-        property string account: 'Loading...'
+        property string history: qsTr('Loading...')
+
+        property ListModel contractoptions: ListModel {}
+        property ListModel accountoptions: ListModel {}
+        property ListModel mobileoptions: ListModel {}
+
     }
 
-    property bool dataLoading: false
+    property bool dataLoading: true
     property bool __debug: false
     property string version: '0.1'
 
@@ -124,8 +128,16 @@ ApplicationWindow
 
     // Function for updating the data from other pages
     function updateMainData(force_update) {
-        force_update = force_update ? force_update : false;
-        python.updateData(force_update)
+        if (python.isLoggedIn()) {
+            force_update = force_update ? force_update : false;
+            python.updateData(force_update)
+        } else {
+            force_settings_page()
+        }
+    }
+
+    function getMobileOptions() {
+        return python.getEditOptions()
     }
 
     function saveMobileOptions() {
@@ -134,6 +146,7 @@ ApplicationWindow
 
     // Check if the needed credentials are availabe. If not, go to the settings screen
     function force_settings_page() {
+        stopLoader()
         if (statusApp.pageStack.busy) {
             statusApp.pageStack.completeAnimation();
         }
@@ -195,6 +208,7 @@ ApplicationWindow
             anchors {
                 top: parent.top
                 left: parent.left
+                topMargin: 1
                 leftMargin: Theme.paddingSmall
                 rightMargin: Theme.paddingSmall
             }
@@ -214,7 +228,6 @@ ApplicationWindow
         id: python
 
         Component.onCompleted: {
-
             setHandler('update-data', function(message) {
                 debug('Got a data update from Python module: ' + message)
                 updateData()
@@ -231,7 +244,6 @@ ApplicationWindow
             debug('Start deamon!');
 
             importModule('SimpelScraper', function() {
-                startLoader();
                 debug('Get credentials!');
 
                 // Here we use synchronized calls, so that we are sure to get all the data at the right time
@@ -247,23 +259,8 @@ ApplicationWindow
                     mobileDataObject.password = password;
                 }
 
-                if (mobileDataObject.username !== '' && mobileDataObject.password != '') {
-                    debug('Check if logged in already?');
-                    if (python.isLoggedIn()) {
-                        debug('Yup, and now update data');
-                        updateData();
-                    } else {
-                        // Invalid credentials
-                        notificationMessage(qsTr('The loaded credentials are invalid'))
-                        force_settings_page();
-                    }
-                } else {
-                    debug('Force settings window');
-                    notificationMessage(qsTr('No credentials available'))
-                    force_settings_page()
-                }
+                checkCredentials(mobileDataObject.username,mobileDataObject.password)
             });
-
         }
 
         // Function to check if we are loggedin at the Mobile provider
@@ -272,7 +269,20 @@ ApplicationWindow
         }
 
         function checkCredentials(username,password) {
-            return call_sync('SimpelScraper.scraper.set_credentials', [username,password]);
+            startLoader();
+            debug('Check if logged in already?');
+            call('SimpelScraper.scraper.set_credentials', [username,password], function(result) {
+                if (result === true) {
+                    debug('Yup, and now update data');
+                    mobileDataObject.username = username;
+                    mobileDataObject.password = password;
+                    notificationMessage(qsTr('Login successfull. Loading data...'))
+                    updateData();
+                } else {
+                    notificationMessage(qsTr('The loaded credentials are invalid'))
+                    force_settings_page();
+                }
+            });
         }
 
         // Get the latest data from your Mobile operator
@@ -310,69 +320,69 @@ ApplicationWindow
                 mobileDataObject.last_update = new Date(result['last_update'] * 1000)
 
                 getAccount()
+                getContract()
+                getOptions()
+
                 getHistory()
 
-                notificationMessage(qsTr('Update account data'))
+                notificationMessage(qsTr('Account data is up to date'))
                 stopLoader();
-            });
-        }
-
-        function saveOptions() {
-            call('SimpelScraper.scraper.set_voicemail_settings', [mobileDataObject.voicemail_active,mobileDataObject.voicemail_pin,mobileDataObject.voicemail_email],function(result){
-                debug('Saved voicemail settings: ' + result);
-                notificationMessage(qsTr('Updated voicemail settings'))
-            });
-
-            call('SimpelScraper.scraper.set_callforward_settings', [mobileDataObject.callforward_direct,mobileDataObject.callforward_busy],function(result){
-                debug('Saved callforward settings: ' + result);
-                notificationMessage(qsTr('Updated call forwarding settings'))
             });
         }
 
         function saveSettings(username,password,data_update_timeout) {
             debug('Start saving settings');
-            startLoader();
 
             var login = true;
-            if (username !== mobileDataObject.username || password !== mobileDataObject.password) {
-                debug('Check new credentials...');
-                if (checkCredentials(username,password)) {
-                    mobileDataObject.username = username;
-                    mobileDataObject.password = password;
-                    stopLoader();
-                    notificationMessage(qsTr('The new credentials are saved'))
-                    updateData(true);
-                } else {
-                    login = false;
-                    stopLoader();
-                    notificationMessage(qsTr('The new credentials are not valid'))
-                }
-            }
-
             if (data_update_timeout !== mobileDataObject.data_update_timeout) {
                 call('SimpelScraper.scraper.set_data_update_timeout', [data_update_timeout],function(result){
-                    stopLoader();
                     if (result) {
                         mobileDataObject.data_update_timeout = data_update_timeout
                         notificationMessage(qsTr('Timeout set to %L1 hours').arg(mobileDataObject.data_update_timeout))
                     } else {
                         notificationMessage(qsTr('Error updating timeout'))
                     }
-
                 });
             }
-            return login;
+
+            if (username !== mobileDataObject.username || password !== mobileDataObject.password) {
+                debug('Check new credentials...');
+                checkCredentials(username,password)
+            }
         }
 
         function getAccount() {
-            call('SimpelScraper.scraper.get_all_data', [false],function(result){
-                debug('Got account data!');
-                var account = '';
-                for (var key in result['account']) {
-                    account = account + key + ':\n' + result['account'][key] + '\n\n'
+            call('SimpelScraper.scraper.get_account_info',[], function(result){
+                debug('Got account info!');
+                mobileDataObject.accountoptions.clear()
+                for (var key in result) {
+                    mobileDataObject.accountoptions.append({'labelName':result[key]['label'],'labelValue':result[key]['value']});
                 }
-                mobileDataObject.account = account;
             });
+        }
+
+        function getContract() {
+            call('SimpelScraper.scraper.get_contract_info',[], function(result){
+                debug('Got contract info!');
+                mobileDataObject.contractoptions.clear()
+                for (var key in result) {
+                    mobileDataObject.contractoptions.append({'labelName':result[key]['label'],'labelValue':result[key]['value']});
+                }
+            });
+        }
+
+        function getOptions() {
+            call('SimpelScraper.scraper.get_mobile_options',[], function(result){
+                debug('Got mobile options info!');
+                mobileDataObject.mobileoptions.clear()
+                for (var key in result) {
+                    mobileDataObject.mobileoptions.append({'labelName':result[key]['label'],'labelValue':result[key]['value']});
+                }
+            });
+        }
+
+        function getEditOptions() {
+            return call_sync('SimpelScraper.scraper.get_mobile_options', [true]);
         }
 
         function getHistory() {
@@ -419,7 +429,10 @@ ApplicationWindow
 
                     mobileDataObject.history = 'loading...'
 
-                    mobileDataObject.last_update = new Date()
+                    mobileDataObject.accountoptions.clear()
+                    mobileDataObject.contractoptions.clear()
+
+                    mobileDataObject.last_update = 0
                  }
             });
         }

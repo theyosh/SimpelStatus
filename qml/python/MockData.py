@@ -9,7 +9,7 @@ def random(max):
 
 def getpage(page):
   # Fake HTTP traffic duration for testing animation
-  time.sleep(randint(1, 3))
+  time.sleep(randint(2, 6))
   if 'login' == page:
     return data_login
   if 'logincheck' == page:
@@ -22,8 +22,277 @@ def getpage(page):
     return data_contract
   if 'plafond' == page:
     return data_plafond
+  if 'options' == page:
+    return data_options.replace('\n','')
 
 # Mock Data
+
+data_options = """
+
+<!DOCTYPE html>
+
+<html>
+<head><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1" /><title>
+        Mijn Simpel
+</title><link href="/resources/css/defaults.css?v=002" rel="stylesheet" type="text/css" /><link href="/resources/css/master.css?v=002" rel="stylesheet" type="text/css" /><link href="/resources/css/cookiechecker.css?v=002" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 8]>
+   <link href="/resources/css/cookiecheckerIE.css?v=002" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+    <script src="/resources/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.corner.js" type="text/javascript"></script>
+    <script src="/resources/js/prototypes.js" type="text/javascript"></script>
+    <script src="/resources/js/validatie.js?v=003" type="text/javascript"></script>
+    <script src="/resources/js/tooltip.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.tools.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.ui.datepicker-nl.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.reveal.cookie.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.reveal.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.reveal.contact.js" type="text/javascript"></script>
+    <script src="/resources/js/cookiechecker.js" type="text/javascript"></script>
+    <script src="/resources/js/checkiban.js" type="text/javascript"></script>
+
+    <!-- Google Analyticsscript -->
+    <script>(function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-1956252-1', 'simpel.nl'); ga('send', 'pageview');</script>
+    <!-- End Google Analyticsscript -->
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+                        $("form1").submit(function () {
+                $(this).submit(function () {
+                    return false;
+                });
+                return true;
+            });
+
+
+            doTooltip('.tooltiptarget');
+
+            $(".tooltiptargetlink").tooltip({ position: 'left top', offset: [45, -15], effect: 'fade' });
+
+            ValidateInitialize('select, input[type=checkbox], input[type=password], input[type=text]');
+            $('.submit').bind('click', function (event) {
+                if (!doValidateAll('select, input[type=checkbox], input[type=password], input[type=text]')) {
+                    event.preventDefault();
+                }
+            });
+
+
+            $('img#simpellogo').bind('click', function (event) {
+                window.location.href = '/';
+                event.preventDefault();
+            });
+
+            $('div.content').corner('10px');
+            $('a.button').corner('5px');
+            if ($.browser.msie && $.browser.version < 9) {
+                $('.menu .selected').corner('4px');
+            } else {
+                $('.menu span, .menu li a').corner('4px');
+            }
+
+            $('.login').corner('5px bottom');
+
+            $('table.classictable').each(function () {
+                $(this).find('tr:even').addClass('alt');
+            });
+        });
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+
+        //]]>
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function(){
+             message('#error', 3, false, '', '');
+             $('#simproperties').addClass('selected');
+
+
+             $('tr.greyedout input[type=checkbox]').bind('change', function(){
+                if($(this).attr('checked')){
+                    $('tr.greyedout input[type=text], tr.greyedout input[type=password], tr.greyedout textarea').attr('disabled', '').parent('span').removeClass('disabled');;
+                } else {
+                    $('tr.greyedout input[type=text], tr.greyedout input[type=password], tr.greyedout textarea').val('0,00').attr('disabled', 'disabled').parent('span').addClass('disabled');
+
+                }
+             }).trigger('change');
+        });
+        //]]>
+    </script>
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="/static/css/IE7.css" />
+    <style type="text/css">
+        .showpassword {float:right; !important; margin-top:-20px;}
+        .showpassword2 {witdh:220px;}
+        span.formfield
+        {
+                background-color: #ededee;
+                padding: 0px 0px 0px 0px;
+                margin:0px 0px 0px 3px;
+                background: transparent url(/resources/img/bg/forms/input_right.png) no-repeat top right;
+                display: inline-block;
+                width:405px !important;
+        }
+
+    </style>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <style type="text/css">
+            span.formfield{
+                 background-position: right 1px !important;
+            }
+
+            span.formfield select{
+                background-color: #ededee;
+            }
+
+
+        </style>
+    <![endif]-->
+    <!--[if IE 8]>
+        <style type="text/css">
+            span.formfield input[type="text"], span.formfield input[type="password"], span.formfield select{
+                 font-size:17px !important;
+            }
+        </style>
+    <![endif]-->
+
+</head>
+<body>
+    <form name="aspnetForm" method="post" action="simproperties_edit.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE1Mjk4MzQzODQPZBYCZg9kFgICAw9kFgYCAQ8WAh4EVGV4dAXeATxkaXYgY2xhc3M9Im1lbnUiPjxzcGFuIGlkPSJtZW51X3RhcmlldmVuIj48YSBocmVmPSJodHRwOi8vd3d3LnNpbXBlbC5ubC9UYXJpZXZlbi5hc3B4IiB0YXJnZXQ9Il9ibGFuayI+dGFyaWV2ZW48L2E+PC9zcGFuPjxzcGFuIGlkPSJtZW51X2ZhcSI+PGEgaHJlZj0iaHR0cDovL3d3dy5zaW1wZWwubmwvZmFxLmFzcHgiIHRhcmdldD0iX2JsYW5rIj52cmFnZW48L2E+PC9zcGFuPjwvZGl2PmQCBQ8WAh8ABb8GPHVsIGNsYXNzPSJtZW51Ij48bGk+PGEgaWQ9ImhvbWUiIGhyZWY9Ii9sYW5kaW5nLmFzcHgiPmhvbWU8L2E+PC9saT48bGk+PGEgaWQ9ImFjY291bnQiIGhyZWY9Ii9hY2NvdW50LmFzcHgiPm1pam4gZ2VnZXZlbnM8L2E+PC9saT48bGk+PGEgaWQ9InNpbXByb3BlcnRpZXMiIGhyZWY9Ii9zaW1wcm9wZXJ0aWVzLmFzcHgiPmdlZ2V2ZW5zIGFib25uZW1lbnQ8L2E+PC9saT48bGk+PGEgaWQ9InVwZ3JhZGUiIGhyZWY9Ii91cGdyYWRlLmFzcHgiPndpanppZyBhYm9ubmVtZW50PC9hPjwvbGk+PGxpPjxhIGlkPSJiZWxwbGFmb25kIiBocmVmPSIvYmVscGxhZm9uZC5hc3B4Ij5wbGFmb25kPC9hPjwvbGk+PGxpPjxhIGlkPSJpbnZvaWNlcyIgaHJlZj0iL2ludm9pY2VzLmFzcHgiPmZhY3R1cmVuPC9hPjwvbGk+PGxpPjxhIGlkPSJjYWxsX2RldGFpbHMiIGhyZWY9Ii9yZXF1ZXN0X3NwZWNpZmljYXRpb25zLmFzcHgiPmJlbHNwZWNpZmljYXRpZTwvYT48L2xpPjxsaT48YSBpZD0iY3JlZGl0IiBocmVmPSIvY3JlZGl0LmFzcHgiPmFjdHVlZWwgdmVyYnJ1aWs8L2E+PC9saT48bGk+PGEgaWQ9ImNoYW5nZV9wYXNzd29yZCIgaHJlZj0iL3Bhc3N3b3JkX2VkaXQuYXNweCI+d2lqemlnIHdhY2h0d29vcmQ8L2E+PC9saT48bGk+PGEgaWQ9ImJsb2NrIiBocmVmPSIvYmxvY2suYXNweCI+Ymxva2tlZXIgbnVtbWVyPC9hPjwvbGk+PGxpPjxhIGlkPSJzaW1zd2FwIiBocmVmPSIvU2ltU3dhcC5hc3B4Ij52ZXJ2YW5nZW5kZSBTaW1rYWFydDwvYT48L2xpPjxsaT48YSBpZD0iY29udGFjdCIgaHJlZj0iL2NvbnRhY3QuYXNweCI+c3RlbCBqZSB2cmFhZzwvYT48L2xpPjwvdWw+ZAIHD2QWAgIDDxYCHwAFCjA2MjM0MjI0OTFkZAQwGRFC36voTwXcfMNVWViC1zGA" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div>
+
+        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="0C43016F" />
+        <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWFQLjwMqeAQLy5rPuDALt5rPuDALoser3CwL3ser3CwL4ser3CwLnser3CwL4ser3CwL7ser3CwLlser3CwL6ser3CwL6ser3CwL7ser3CwLkser3CwL4ser3CwLjser3CwL8ser3CwL9ser3CwLiser3CwKPg92dCwLHjbmPCxihlcVOYLsCqIGCfSeNpEOf9u6g" />
+</div>
+    <div class="container">
+                <div class="header">
+                        <img src="/resources/img/logo/simpellogo.png" alt="simpel" id="simpellogo" />
+                        <div class="menu"><span id="menu_tarieven"><a href="http://www.simpel.nl/Tarieven.aspx" target="_blank">tarieven</a></span><span id="menu_faq"><a href="http://www.simpel.nl/faq.aspx" target="_blank">vragen</a></span></div>
+                </div>
+
+        <div class="contentcontainer">
+            <div class="content errorbox" id="error">
+                <div class="errorcontent">
+                </div>
+                <a href="#" class="close">x</a>
+            </div>
+            <div class="content" id="content">
+                <div class="menucontainer">
+
+
+                    <ul class="menu"><li><a id="home" href="/landing.aspx">home</a></li><li><a id="account" href="/account.aspx">mijn gegevens</a></li><li><a id="simproperties" href="/simproperties.aspx">gegevens abonnement</a></li><li><a id="upgrade" href="/upgrade.aspx">wijzig abonnement</a></li><li><a id="belplafond" href="/belplafond.aspx">plafond</a></li><li><a id="invoices" href="/invoices.aspx">facturen</a></li><li><a id="call_details" href="/request_specifications.aspx">belspecificatie</a></li><li><a id="credit" href="/credit.aspx">actueel verbruik</a></li><li><a id="change_password" href="/password_edit.aspx">wijzig wachtwoord</a></li><li><a id="block" href="/block.aspx">blokkeer nummer</a></li><li><a id="simswap" href="/SimSwap.aspx">vervangende Simkaart</a></li><li><a id="contact" href="/contact.aspx">stel je vraag</a></li></ul>
+                </div>
+
+    <h1>Bewerk gegevens van mobielnummer: 0623422491</h1>
+
+
+    <h3>Diensten</h3>
+    <table>
+        <div id="ctl00_content_panOptions">
+
+        </span></td><tr><td class="td0">Nummerweergave op specificatie</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlOption0" id="ctl00_content_ddlOption0" value="5" validation="select">
+                <option selected="selected" value="1">Nummerweergave op specificaties afgeschermd</option>
+                <option value="0">Nummerweergave op specificaties niet afgeschermd</option>
+
+        </select></span></td></tr>
+</div>
+    </table>
+    <table>
+        <div id="ctl00_content_panServices">
+
+        <tr><td class="td0">SMS</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService0" id="ctl00_content_ddlService0" validation="select" value="1">
+                <option value="0">SMS versturen geblokkeerd</option>
+                <option selected="selected" value="1">SMS versturen toegestaan</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor SMS toestaan, betekent dit dat je SMS-berichten kunt versturen vanaf je mobiele telefoon. SMS versturen geblokkeerd betekent dat je geen SMS-berichten kunt versturen vanaf je mobiele telefoon. Welke instelling je ook kiest, je kunt wel SMS-berichten ontvangen." class="tooltiptarget"></td></tr><tr><td class="td0">MMS</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService1" id="ctl00_content_ddlService1" validation="select" value="2">
+                <option value="1">MMS versturen toegestaan</option>
+                <option selected="selected" value="0">MMS versturen niet toegestaan</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor MMS versturen toestaan, betekent dit dat je MMS-berichten kunt versturen vanaf je mobiele telefoon. MMS versturen niet toestaan betekent dat je geen MMS-berichten kunt versturen vanaf je mobiele telefoon. Welke instelling je ook kiest, je kunt wel MMS-berichten ontvangen. LET OP: Je hebt voor het ontvangen en versturen van MMS-berichten, aparte instellingen nodig op je mobiele telefoon." class="tooltiptarget"></td></tr><tr><td class="td0">0900 entertainment</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService2" id="ctl00_content_ddlService2" validation="select" value="3">
+                <option selected="selected" value="2">0900 entertainment bellen geblokkeerd</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor 0900 entertainment toegestaan, dan kun je gebruik maken van 0900 entertainment nummers. Deze optie komt beschikbaar wanneer je in totaal 3 facturen hebt voldaan. Let op: het verbruik van 0900 entertainment nummers valt buiten je bundel." class="tooltiptarget"></td></tr><tr><td class="td0">Inkomende gesprekken</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService3" id="ctl00_content_ddlService3" validation="select" value="4">
+                <option value="2">Alleen inkomende gesprekken in het buitenland geblokkeerd</option>
+                <option selected="selected" value="0">Geen blokkade op inkomende gesprekken</option>
+                <option value="1">Alle inkomende gesprekken geblokkeerd</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor alle inkomende gesprekken geblokkeerd kun je niet meer gebeld worden. Als je kiest voor alleen inkomende gesprekken in het buitenland geblokkeerd kun je niet meer gebeld worden in het buitenland. Als je geen blokkade op inkomende gesprekken kiest kun je in binnen- en buitenland gebeld worden. Welke instelling je ook kiest, je kunt wel SMS-berichten ontvangen." class="tooltiptarget"></td></tr><tr><td class="td0">Uitgaande gesprekken</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService4" id="ctl00_content_ddlService4" validation="select" value="5">
+                <option value="2">Bellen naar het buitenland geblokkeerd</option>
+                <option value="1">Alle uitgaande gesprekken geblokkeerd</option>
+                <option selected="selected" value="0">Geen blokkade op uitgaande gesprekken</option>
+                <option value="4">Bellen in het buitenland geblokkeerd</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor alle uitgaande gesprekken geblokkeerd kun je niet meer bellen. Als je bellen in het buitenland geblokkeerd kiest kun je niet meer bellen in het buitenland. Als je bellen naar het buitenland geblokkeerd kiest kun je niet meer vanuit Nederland naar het buitenland bellen. Als je kiest voor geen blokkade op uitgaande gesprekken dan kun je in binnen en buitenland blijven bellen. Welke instelling je ook kiest, je kunt wel SMS-berichten ontvangen." class="tooltiptarget"></td></tr><tr><td class="td0">Buitenlandgebruik</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService5" id="ctl00_content_ddlService5" validation="select" value="7">
+                <option selected="selected" value="0">Geen blokkade in het buitenland</option>
+                <option value="1">Toestel in het buitenland geblokkeerd</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor toestel in het buitenland geblokkeerd kun je in het buitenland niet bellen of gebeld worden, SMSen en mobiel internetten." class="tooltiptarget"></td></tr><tr><td class="td0">Betaalde SMS diensten</td><td class="td1" colspan="3"><span class="formfield"><select name="ctl00$content$ddlService6" id="ctl00_content_ddlService6" validation="select" value="8">
+                <option selected="selected" value="1">Betaalde SMS diensten niet toegestaan</option>
+                <option value="0">Betaalde SMS diensten toegestaan</option>
+
+        </select></span></td><td class="td4" style="text-align:right;"><img style="border-width: 0px;" src="/resources/img/misc/tooltip.png" title="Als je kiest voor het toestaan van betaalde SMS diensten is het mogelijk om betaalde sms diensten te ontvangen." class="tooltiptarget"></td></tr>
+</div>
+    </table>
+    <a id="ctl00_content_lbSubmit" class="button submit" href="javascript:__doPostBack('ctl00$content$lbSubmit','')">Wijzig</a>
+
+            </div>
+
+
+
+
+            <div class="clear"></div>
+
+
+             <div class="footer">
+                            <span><a href="http://www.simpel.nl/contact.aspx" target="_blank">contact</a></span><span><a href="http://www.simpel.nl/privacyverklaring.aspx" target="_blank">privacyverklaring</a></span><span><a href="http://www.simpel.nl/Voorwaarden.aspx" target="_blank">voorwaarden</a></span>
+                    </div>
+                    <a id="ctl00_lbLogOut" class="login" href="javascript:__doPostBack('ctl00$lbLogOut','')">uitloggen</a>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
+"""
 
 data_plafond = """
 

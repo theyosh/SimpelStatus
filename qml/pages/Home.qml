@@ -54,15 +54,15 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
-                text: qsTr('Account')
+                text: qsTr('Account information')
                 onClicked: pageStack.push(Qt.resolvedUrl('Account.qml'))
             }
             MenuItem {
-                text: qsTr('Contract')
+                text: qsTr('Contract information')
                 onClicked: pageStack.push(Qt.resolvedUrl('Contract.qml'))
             }
             MenuItem {
-                text: qsTr('Options')
+                text: qsTr('Mobile Options')
                 onClicked: pageStack.push(Qt.resolvedUrl('Options.qml'))
             }
         }
@@ -196,7 +196,7 @@ Page {
             TextField {
                 id: lastUpdateField
                 placeholderText: qsTr('Loading...')
-                text: Qt.formatDateTime(statusApp.mobileData.last_update,'dddd dd-MMM-yyyy hh:mm:ss')
+                text: statusApp.mobileData.last_update === 0 ? qsTr('Loading...') : Qt.formatDateTime(statusApp.mobileData.last_update,'dddd dd-MMM-yyyy hh:mm:ss')
                 label: qsTr('Last update')
                 readOnly: true
                 labelVisible: true

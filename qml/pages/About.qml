@@ -50,6 +50,7 @@ Page {
             id: column
             width: parent.width
 
+
             PageHeader {
                 title: qsTr('About')
             }
@@ -65,11 +66,12 @@ Page {
                     leftMargin: Theme.paddingLarge
                     rightMargin: Theme.paddingLarge
                 }
+
             }
 
             Label {
                 id: body
-                text: qsTr('With this application you can see your mobile plan status at the operator. It uses web scraping technologie to get the data.\nCurrently it allows you to:\n1. See your status:\n- Call usage\n- SMS usage\n- Data usage\n2. Change voicemail settings\n3. Change callforwarding settings\n\nThe mobile plan data is updated once every %L1 hours.\n\nThis application is not created by Simpel. The used images are copyrighted by Simpel\nSimpel.nl call status app is created by TheYOSH https://theyosh.nl\n(c) 2016').arg(statusApp.mobileData.data_update_timeout )
+                text: qsTr('With this application you can see your mobile plan status at the operator. It uses web scraping technologie to get the data.\nCurrently it allows you to:\n1. See your status:\n- Call usage\n- SMS usage\n- Data usage\n- Max (plafond) tariff\n2. See account information\n3. See contract information\n4. Edit mobile plan options\n\nThe mobile plan data is updated once every %L1 hours.\n\nThis application is not created by Simpel. The used images are copyrighted by Simpel\nSimpel.nl call status app is created by TheYOSH https://theyosh.nl\n(c) 2016').arg(statusApp.mobileData.data_update_timeout )
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 anchors {
@@ -78,6 +80,7 @@ Page {
                     leftMargin: Theme.paddingLarge
                     rightMargin: Theme.paddingLarge
                 }
+
             }
         }
     }

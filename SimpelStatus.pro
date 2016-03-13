@@ -42,11 +42,14 @@ DISTFILES += \
     qml/pages/Settings.qml \
     qml/pages/History.qml \
     qml/pages/Options.qml \
-    qml/pages/Invoices.qml \
     qml/python/SimpelScraper.py \
     qml/python/MockData.py \
     qml/python/Encryption.py \
     qml/images/mijn_simpel.png \
     rpm/SimpelStatus.changes \
-    translations/SimpelStatus-nl.ts
+    translations/SimpelStatus-nl.ts \
+    qml/pages/Contract.qml \
+    qml/images/SimpelStatus.png \
+    qml/pages/EditOptions.qml \
+    qml/pages/FieldListElement.qml
 
