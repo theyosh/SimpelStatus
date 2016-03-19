@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Mar 20 2016 TheYOSH <OpenRepos@theyosh.nl> 0.0.2-1
+- Fixed automatic relogin after cookie timeout
+- Added screenshots
+
 * Sun Mar 6 2016 TheYOSH <OpenRepos@theyosh.nl> 0.0.1-1
 - Restarted based on the Choozze status app
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-VERSION = '0.1'
+VERSION = '0.2'
 DEBUG = False
 MOCKDATA = False
 
@@ -269,12 +269,12 @@ class SimpelScraper:
       html = response.read().decode('utf-8')
 
     # Moet nog worden uitgezocht.... hangt van de cookies en sessies af
-    #if page != 'login' and self.online_pages['login']['regexes']['login_detect'].search(html):
-    #  #self.login_detect_regex.search(html):
-    #  self.__notify_message('notification','Cookie expired, relogin for page' + page)
-    #  if self.login():
-    #    self.__print_debug('Recursive restart processing online data')
-    #    html = self.__process_online_data(page,data)
+    if page != 'login' and self.online_pages['login']['regexes']['login_detect'].search(html) is not None:
+      #self.login_detect_regex.search(html):
+      self.__notify_message('notification','Cookie expired, relogin for page' + page)
+      if self.login():
+        self.__print_debug('Recursive restart processing online data')
+        html = self.__process_online_data(page,data)
 
     # Some cleaning up
     html = html.replace('\n','')

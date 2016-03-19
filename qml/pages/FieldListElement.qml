@@ -17,7 +17,6 @@ Item {
         color: '#923178'
         font.bold: true
         width: parent.width;
-
     }
     Text {
         id: value

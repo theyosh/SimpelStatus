@@ -9,7 +9,7 @@ def random(max):
 
 def getpage(page):
   # Fake HTTP traffic duration for testing animation
-  time.sleep(randint(2, 6))
+  time.sleep(randint(3, 8))
   if 'login' == page:
     return data_login
   if 'logincheck' == page:

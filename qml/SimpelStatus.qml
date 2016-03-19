@@ -87,15 +87,14 @@ ApplicationWindow
 
         property string history: qsTr('Loading...')
 
-        property ListModel contractoptions: ListModel {}
-        property ListModel accountoptions: ListModel {}
-        property ListModel mobileoptions: ListModel {}
-
+        property ListModel contractoptions: ListModel { }
+        property ListModel accountoptions: ListModel { }
+        property ListModel mobileoptions: ListModel { }
     }
 
     property bool dataLoading: true
     property bool __debug: false
-    property string version: '0.1'
+    property string version: '0.2'
 
     id: statusApp
     initialPage: Component { Home {} }
